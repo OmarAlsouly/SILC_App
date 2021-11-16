@@ -32,7 +32,7 @@ def get_links(searchterm):
     #iterate through the given list
     for url, level in google_result: 
 
-        if len(google_result) >= 500: #limiting the results to 500 for now ---to be removed
+        if len(google_result) >= 5000: #limiting the results to 10000 for now ---to be changed according to business reqs
             break    
 
         if level > 1: #limiting the results to level 2
