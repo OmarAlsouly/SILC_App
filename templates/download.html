@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+{% extends 'base.html' %}
+
+{% block content %}
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %} Web Scraper </title>
+    
+</head>
+<body>
+<style>
+    .wrapper {
+        padding-left: 50px;
+    }
+</style>
+  <div class="wrapper">
+    <h3>Available files, sorting by most recent:</h3>
+    {% for f,k in file_names %}
+    <div class="data">
+        <table>
+              <tr>
+                <th> {{ k }} </th>
+                <th> <p>      </p> </th>
+                <th> <a href=/download/{{ f }}> Download </a> </th>
+              </tr>
+              <tr>
+                <th> <p>  </p> </th>
+              </tr>
+        </table>
+    </div>      
+    {% endfor %}
+  </div>
+</body>
+{% endblock %}
+</html>
