@@ -7,6 +7,7 @@ import warnings
 from datetime import datetime
 from ScrapeURLs import ObtainText, get_name, get_org, summarise , getAnswer
 from CrawlURLs import get_links
+import yagmail
 
 chrome_options = Options()  
 chrome_options.add_argument("--headless") # Opens the browser up in background
@@ -52,7 +53,15 @@ def create_dataset(searchterm):
     final_data = pd.DataFrame(data, columns=['Name', 'Organisation', 'Occupation', 'Contact Number', 'Email ID', 'Website Summary', 'Website URL'])
     now = datetime.now()
     current_time = now.strftime("%d-%m-%Y-%H-%M")
-    filename = 'outputs\\'+ str(current_time) +'.csv'
+    filename = 'outputs\\'+ searchterm.replace(" ", "-") + '__' + str(current_time) +'.csv'
     final_data.to_csv(filename)
+
+    #sending email
+    email_title = 'SILC Crawler Update'
+    email_body = 'job \'' + searchterm + '\' created on ' + str(current_time) + ' is finished!'
+
+    yag = yagmail.SMTP('silctestapp@gmail.com', '123456-123a')
+    yag.send('o-alsouli@hotmail.com', email_title, email_body)
+
 
     return filename

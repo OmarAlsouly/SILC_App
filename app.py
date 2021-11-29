@@ -7,6 +7,7 @@ app = Flask(__name__)
 app.secret_key = os.urandom(16) #secret key for sessions
 
 
+
 #home page route
 @app.route('/', methods = ['GET', 'POST'])
 def index():
@@ -25,7 +26,7 @@ def download():
     dir_path = 'outputs'
     for filename in sorted(os.listdir(dir_path)):
         if filename.endswith('csv'):
-            file_names.append([filename,datetime.strptime(filename.replace('.csv', ''),"%d-%m-%Y-%H-%M")])
+            file_names.append([filename,datetime.strptime(filename.replace('.csv', '').split('__')[1],"%d-%m-%Y-%H-%M")])
 
     file_names = sorted(file_names, key=lambda x: x[1], reverse=True)
 
